@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { TodoContext } from './context/TodoContext';
 
-const AddItem = ({ addItem }) => {
+const AddItem = () => { //{ addItem }
+
+  const { addItem } = useContext(TodoContext)
   const [item, setItem] = useState('');
 
   const handleClick = (e) => {
@@ -16,9 +19,9 @@ const AddItem = ({ addItem }) => {
           value={item}
           onChange={(e) => setItem(e.target.value)}
           type="text"
-          placeholder="text something..."
+          placeholder="Add New Item"
         />
-        <button>Add Item</button>
+        <button>+</button>
       </form>
     </div>
   );

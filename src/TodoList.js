@@ -1,16 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import AddItem from './AddItem';
+import { TodoContext } from './context/TodoContext';
 
-const TodoList = ({ addItem, deleteItem, lists }) => {
+const TodoList = () => {//{ addItem, deleteItem, lists }
+
+  const {list, deleteItem} = useContext(TodoContext);
+
+
   const handleDelete = (id) => {
-    const finalList = lists.filter((list) => list.id !== id);
+    const finalList = list.filter((list) => list.id !== id);
     console.log(id);
     deleteItem(finalList);
   };
   return (
     <div className="todo-list">
+      {!list.length && <div>Hello Mother F**ker :)</div> }
       <ul>
-        {lists.map((list) => {
+        {list.map((list) => {
           return (
             <li key={list.id} onClick={() => handleDelete(list.id)}>
               {list.name}
@@ -18,7 +24,7 @@ const TodoList = ({ addItem, deleteItem, lists }) => {
           );
         })}
       </ul>
-      <AddItem addItem={addItem} />
+      <AddItem/>
     </div>
   );
 };
